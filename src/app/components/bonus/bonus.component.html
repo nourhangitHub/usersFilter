@@ -1,0 +1,18 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <input type="text" class="form-control" [(ngModel)]="permutationValue">
+        </div>
+        <button class="btn btn-primary col-md-2" (click)="findPermutations(permutationValue)"> show permutation</button>
+    </div>
+    <h4 class="text-capitalize" *ngIf="!permutationsDone"> enter your characters</h4>
+    <div *ngIf="permutationsDone">
+        <h4 class="text-capitalize"> all possibilites of characters</h4>
+        <div *ngFor="let permutation of permutationsArray; let i = index">
+            <div>
+                {{i+1}}-{{permutation}}
+            </div>
+        </div> 
+    </div> 
+</div>
+

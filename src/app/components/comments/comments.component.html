@@ -1,0 +1,102 @@
+<div class="comments-container">
+    <button class="btn btn-info" routerLink="../../users"> <i class="fas fa-backward"></i> Back</button>
+    <hr>
+    <div class="page-header">
+        <div class="d-flex first-row mb-4">
+            <img class="profile-img" src="../../../assets/images/person.jpg" alt="user-img">
+            <div class="d-flex flex-column mt-auto mb-auto">
+                <h5>{{userName}}</h5>
+                <div class="text-muted email">{{userEmail}}</div>
+                <div [ngClass]="{'active': userStatus === 'Active'}">
+                    <i class="fas fa-circle"></i> {{userStatus}}
+                </div>
+            </div>
+        </div>
+        <div class="second-row">
+            <div>
+                <h6>What is Lorem Ipsum?</h6>
+                <div class="text-muted mb-2">14 novamber 14:65</div>
+            </div>
+            <div class="row">
+                <img class="no-img col-md-4 col-sm-6 mb-2" src="../../../assets/images/comment-photo.jpg"
+                    alt="header image">
+                <p class="col-md-8 col-sm-6">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    It has survived not only five centuries, but also the leap into electronic typesetting,
+                    remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                    containing Lorem Ipsum passages, and more recently with desktop publishing software
+                    like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="post-comments shadow p-3 mb-5 bg-white rounded">
+        <div class="table-header">
+            <div class="inputsRow mb-3">
+                <h5 class="text-capitalize">Users Comments</h5>
+                <div *ngIf="!noComments" class="d-flex hint">
+                    <span class="p-1 mt-auto mb-auto">
+                        Showing {{perPage}} of {{totalRecords}}
+                    </span>
+                    <select class="form-control per-page-select p-1" #perPageValue="ngModel" name="perPage"
+                        [(ngModel)]="perPage">
+                        <option *ngFor="let number of itemsPerPage" [ngValue]="number">{{number}}</option>
+                    </select>
+                    <span class="mt-auto mb-auto p-1"> Per Page </span>
+                </div>
+            </div>
+        </div>
+        <table *ngIf="!noComments" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name
+                            <select class="name-search" ngModel [(ngModel)]="nameFilterValue"
+                                (ngModelChange)="filterByName($event)" [ngModelOptions]="{standalone: true}">
+                                <option *ngFor="let name of nonRepeatNames" [Value]="name">{{name}}</option>
+                            </select>
+                    </th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Body</th>
+                    <th scope="col row">
+                        <span class="col-md-8">Created Date</span>
+                        <select class="col-md-4 createdDate-search" ngModel [(ngModel)]="createdDateFilterValue"
+                          (ngModelChange)="filterByCreatedDate($event)" [ngModelOptions]="{standalone: true}">
+                          <option *ngIf="emptyCratedDate === null">data is already filterd</option>
+                          <option *ngFor="let createdDate of nonRepeatCreatedDate" [Value]="createdDate">{{createdDate |
+                            ChaneFormate}}</option>
+                        </select>
+                      </th>
+                      <th scope="col row">
+                        <span class="col-md-8">Update Date</span>
+                        <select class="col-md-4 createdDate-search" ngModel [(ngModel)]="updatedDateFilterValue"
+                          (ngModelChange)="filterByUpdatedDate($event)" [ngModelOptions]="{standalone: true}">
+                          <option *ngIf="emptyUpdatedDate === null">data is already filterd</option>
+                          <option *ngFor="let updatedDate of nonRepeatUpdatedDate" [Value]="updatedDate">{{updatedDate |
+                            ChaneFormate}}</option>
+                        </select>
+                      </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let comment of allComments | paginate: { itemsPerPage: perPage, currentPage: pageNumber, totalItems: totalRecords }">
+                    <th scope="row">{{comment.id}}</th>
+                    <td>{{comment.name}}</td>
+                    <td>{{comment.email}}</td>
+                    <td>{{comment.body}}</td>
+                    <td>{{comment.created_at | ChaneFormate}}</td>
+                    <td>{{comment.updated_at | ChaneFormate}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="noComments">
+            sorry no comments found
+        </div>
+        <pagination-controls *ngIf="!noComments" class="text-center" (pageChange)="pageNumber = $event">
+        </pagination-controls>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="posts-container">
+    <button class="btn btn-info" routerLink="../"><i class="fas fa-backward"></i> Back</button>
+    <hr>
+    <div class="page-header">
+        <div class="d-flex  first-row">
+            <img class="profile-img" src="../../../assets/images/person.jpg" alt="user-img">
+            <div class="d-flex flex-column mt-auto mb-auto">
+                <h5>{{userName}}</h5>
+                <div class="text-muted email">{{userEmail}}</div>
+                <div [ngClass]="{'active': userStatus === 'Active'}">
+                  <i class="fas fa-circle"></i> {{userStatus}}
+                </div>
+            </div>
+        </div>
+        <div class="row second-row">
+            <div class="col-md-3 col-sm-6 user-info">
+                <div class="text-muted text-uppercase"> total no<br> of posts</div>
+                <div class="posts-number number">{{totalRecords}}</div>
+            </div>
+            <div class="col-md-3 col-sm-6 user-info">
+                <div class="text-muted text-uppercase"> current pages <br> no of posts</div>
+                <div class="page-number number">{{pageNumber}}</div>
+            </div>
+            <div class="col-md-3 col-sm-6 user-info">
+                <div class="text-muted text-uppercase"> user <br> creation date</div>
+                <div class="date-number number">{{userCreatedAt | ChaneFormate}}</div>
+            </div>
+            <div class="col-md-3 col-sm-6 user-info">
+                <div class="text-muted text-uppercase"> user <br>updated date</div>
+                <div class="date-number number">{{userUpdatedAt | ChaneFormate}}</div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="userPosts shadow p-3 mb-5 bg-white rounded">
+      <div class="table-header">
+        <div class="inputsRow mb-3">
+          <h5 class="text-capitalize">user posts</h5>
+          <div *ngIf="!noPosts" class="d-flex hint">
+            <span class="p-1 mt-auto mb-auto">
+              Showing {{perPage}} of {{totalRecords}}
+            </span>
+              <select class="form-control per-page-select p-1" #perPageValue="ngModel" name="perPage" [(ngModel)]="perPage">
+                <option *ngFor="let number of itemsPerPage" [ngValue]="number">{{number}}</option>
+              </select>
+            <span class="mt-auto mb-auto p-1"> Per Page </span>
+          </div>
+        </div>
+      </div>
+          <table *ngIf="!noPosts" class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">postId</th>
+                <th scope="col">Post Title</th>
+                <th scope="col">post Body</th>
+              </tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let post of allPosts | paginate: { itemsPerPage: perPage, currentPage: pageNumber, totalItems: totalRecords }" (click)="postComments(post)">
+                <th scope="row">{{post.id}}</th>
+                <td>{{post.title}}</td>
+                <td>{{post.body}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="noPosts">
+            no posts found
+          </div>
+          <pagination-controls class="text-center" *ngIf="!noPosts" (pageChange)="pageNumber = $event"></pagination-controls>
+    </div>
+</div>

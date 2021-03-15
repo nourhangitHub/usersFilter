@@ -1,0 +1,148 @@
+.posts-container {
+  margin: 30px 60px;
+  .page-header {
+    height: 300px;
+    position: relative;
+    .first-row{
+      .profile-img {
+        margin-right: 25px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+      }
+      .email {
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
+      .active {
+        color: rgb(34, 172, 34);
+      }
+    }
+    .second-row {
+      position: absolute;
+      bottom: -15px;
+      font-size: 12px;
+      .user-info {
+        width: 170px;
+        .number{
+          border-right: 1px solid #E5E5E5;
+          margin-top: 5px;
+          height: 40px;
+        }
+        
+      }
+      .posts-number{
+        color: rgb(40, 14, 156);
+        font-weight: 500;
+        font-size: 15px;
+      }
+      .page-number{
+        color: rgb(136, 54, 54);
+        font-weight: 500;
+        font-size: 15px;
+      }
+      .date-number{
+        color: rgb(179, 176, 176);
+        font-weight: 500;
+        font-size: 13px;
+      }
+    }
+  }
+  .userPosts{
+    border: 1px solid #ccc;
+    padding: 20px;
+    .inputsRow{
+      display: flex;
+      justify-content: space-between;
+      .hint{
+        font-size: 15px;
+        color: #ccc9c9;
+        min-width: 250px;
+        justify-content: end;
+        .per-page-select{
+          width: 50px;
+        }
+      }
+    }
+    table {
+      font-size: 14px;
+      width: 100%;
+      table-layout: fixed;
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      &.table thead th {
+          vertical-align: initial;
+      }
+      td{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      tr{
+        cursor: pointer;
+      }
+  }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  table {
+    border: 0;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 770px){
+  .posts-container{
+    .page-header{
+      height: 330px;
+    }
+      .hint{
+          font-size: 12px;
+      }
+  }
+}
+
+@media screen and (max-width: 520px){
+  .posts-container{
+    .inputsRow{
+      flex-direction: column;
+      .hint{
+        margin-top: 10px;
+        justify-content: start;
+      }
+    }
+  }
+}

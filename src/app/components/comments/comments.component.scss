@@ -1,0 +1,114 @@
+.comments-container {
+  margin: 30px 60px;
+  .page-header {
+    .first-row{
+      .profile-img {
+        margin-right: 25px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+      }
+      .email {
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
+      .active {
+        color: rgb(34, 172, 34);
+      }
+    }
+    .second-row {
+      font-size: 15px;
+      border-radius: 5px;
+      background-color: rgb(231, 230, 230);
+      padding: 15px;
+    }
+  }
+  .post-comments{
+    border: 1px solid #ccc;
+    padding: 20px;
+    .inputsRow{
+      display: flex;
+      justify-content: space-between;
+      .hint{
+        font-size: 15px;
+        color: #ccc9c9;
+        min-width: 250px;
+        justify-content: end;
+        .per-page-select{
+          width: 50px;
+        }
+      }
+    }
+    table {
+      font-size: 14px;
+      width: 100%;
+      table-layout: fixed;
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      &.table thead th {
+          vertical-align: initial;
+      }
+      td{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .name-search,.createdDate-search{
+        border: none;
+        padding: 0;
+        width: 16px;
+    }
+  }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  table {
+    border: 0;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 580px){
+  .comments-container{
+    .inputsRow{
+      flex-direction: column;
+      .hint{
+        margin-top: 10px;
+        justify-content: start;
+      }
+    }
+  }
+}
